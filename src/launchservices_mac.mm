@@ -24,7 +24,11 @@ namespace launchservices {
     @autoreleasepool {
       NSString *contentType = [NSString stringWithUTF8String:contentTypeString.c_str()];
       NSString *bundleID = (__bridge NSString *) LSCopyDefaultRoleHandlerForContentType((CFStringRef)contentType, rolesMask);
-      result = [bundleID UTF8String];
+      if (bundleID) {
+        result = [bundleID UTF8String];
+      } else {
+        result = "";
+      }
     }
     return result;
   }

@@ -38,7 +38,11 @@ namespace {
       std::string contentTypeString = *String::Utf8Value(args[0]);
       int rolesMask = -1;
       std::string handlerBundleID = that->impl->GetDefaultRoleHandlerForContentType(contentTypeString, rolesMask);
-      NanReturnValue(NanNew(handlerBundleID));
+      if (handlerBundleID.empty()) {
+        NanReturnUndefined();
+      } else {
+        NanReturnValue(NanNew(handlerBundleID));
+      }
     }
 
     static NAN_METHOD(SetDefaultRoleHandlerForContentType) {

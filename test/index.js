@@ -12,6 +12,7 @@ describe('native extension', function() {
   it('should get default role handler for content type', function() {
     if (process.platform === 'darwin') {
       assert.equal(LaunchServices.getDefaultRoleHandlerForContentType('public.plain-text', LaunchServices.kLSRolesAll), 'com.apple.TextEdit');
+      assert.equal(LaunchServices.getDefaultRoleHandlerForContentType('not-a-valid-type', LaunchServices.kLSRolesAll), undefined);
     }
   });
 
